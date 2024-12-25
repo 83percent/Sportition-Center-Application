@@ -10,55 +10,110 @@ import { ref, reactive, computed } from 'vue';
 */
 const joinData = reactive({
     center : {
-        newYn : undefined,      // String(Y or N), 신규 등록 센터 여부
-        code : undefined    // String, centerCode
+        newYn:      undefined,      // String(Y or N), 신규 등록 센터 여부
+        code:       undefined    // String, centerCode
+    },
+    loginInfo : {
+        email:      undefined,
+        password:   undefined
+    },
+    userInfo : {
+        name:       undefined,
+        gender:     undefined,
+        telNo:      undefined
     }
 });
 
-const step = ref(1);
+const step = ref(3);
 const nextStep = () => {
-    if(step.value < 3)  step.value++;
+    switch(step.value) {
+        case 1 : {
+            if(validate.joinCenterData()) step.value++;
+            break;
+        }
+
+        case 2 : {
+            if(validate.joinLoginInfo()) step.value++;
+        }
+
+        case 3 : {
+            if( validate.joinCenterData()
+                && validate.joinUserInfo()
+                && validate.joinUserInfo()
+            ) {
+
+                console.log("Input required all clear !!!");
+
+                // TODO : Create User data
+                // TODO : Move to Login Page
+            }
+        }
+    }
 }
 
 const event = {
     changeCenterInfo : (newYn, code) => {
         joinData.center.newYn = newYn;
         if(newYn === 'N') joinData.center.code = code;
+    },
+    changeLoginEmail : (email) => {
+        joinData.loginInfo.email = email;
+    },
+    changeLoginPassword : (password) => {
+        joinData.loginInfo.password = password;
+    },
+    changeUserName : (name) => {
+        joinData.userInfo.name = name;
+    },
+    changeUserGender: (gender) => {
+        joinData.userInfo.gender = gender;
+    },
+    changeUserTelNo: (telNo) => {
+        joinData.userInfo.telNo = telNo;
     }
 }
 
-
-/*
-    Next Button 감시자
-*/
-const validateJoinCenterData = () => {
-    if(['Y', 'N'].includes(joinData.center.newYn)) {
-        switch(joinData.center.newYn) {
-            case 'Y' : {
-                return true;
-            }
-            case 'N' : {
-                if(joinData.center.code) {
-                    // TODO : UUID RegExp Validate
-                    // TODO : Search UUID Center
+const validate = {
+    joinCenterData : () => {
+        if(['Y', 'N'].includes(joinData.center.newYn)) {
+            switch(joinData.center.newYn) {
+                case 'Y' : {
                     return true;
-                } else {
-                    return false;
+                }
+                case 'N' : {
+                    if(joinData.center.code) {
+                        // TODO : UUID RegExp Validate
+                        // TODO : Search UUID Center
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
             }
+        } else {
+            return false;
         }
+    },
+    
+    joinLoginInfo : () => {
+        return joinData.loginInfo.email && joinData.loginInfo.password;
+    },
+
+    joinUserInfo : () => {
+        return joinData.userInfo.name && joinData.userInfo.gender;
     }
-}
+};
+
 const isNextButtonActive = computed(() => {
     switch (step.value) {
         case 1 : {
-            return validateJoinCenterData();
+            return validate.joinCenterData();
         }
         case 2 : {
-            return false;
+            return validate.joinLoginInfo();
         }
         case 3 : {
-            return false;
+            return validate.joinUserInfo();
         }
     }
 });
@@ -76,7 +131,6 @@ const isNextButtonActive = computed(() => {
             <!-- 1 -->
             <CenterRegistComponent
                 v-if="step === 1"
-                :step="step"
                 :code="joinData.center.code"
                 :newYn="joinData.center.newYn"
                 @changeCenterInfo="event.changeCenterInfo"
@@ -85,11 +139,17 @@ const isNextButtonActive = computed(() => {
             <!-- 2 -->
             <LoginInfoComponent
                 v-if="step === 2"
-                :step="step"/>
+                :email="joinData.loginInfo.email"
+                :password="joinData.loginInfo.password"
+                @changeLoginEmail="event.changeLoginEmail"
+                @changeLoginPassword="event.changeLoginPassword" />
             
             <!-- 3 -->
             <UserInfoComponent
                 v-if="step === 3"
+                :name="joinData.userInfo.name"
+                :gender="joinData.userInfo.gender"
+                :telNo="joinData.userInfo.telNo"
             />
         </article>
         <div id="confirm-wrap">
@@ -139,7 +199,7 @@ main {
 			height: 3rem;
 			cursor: pointer;
 
-			&:hover, &.active {
+			&.active {
 				opacity: 1;
 				transition: 0.15s;
 			}

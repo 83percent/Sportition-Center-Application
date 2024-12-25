@@ -4,10 +4,8 @@ const props = defineProps({
     code : String,
     newYn : String
 });
-console.log(props.newYn);
 const emits = defineEmits(['changeCenterInfo']);
 
-const selectedNewCenterOption = ref(undefined); // Y or N
 const localCenterCode = ref(props.code);
 const event = {
     onOptionClick : (value) => {
@@ -25,7 +23,6 @@ const event = {
         }
     },
     onInputChange : (event) => {
-        console.log(event.target.value)
         emits('changeCenterInfo', props.newYn, event.target.value);
     }
 }

@@ -1,5 +1,7 @@
 <script setup>
-import { ref, defineProps, defineEmits } from 'vue';
+import { ref, defineProps, defineEmits, watch } from 'vue';
+const emits = defineEmits(['changeUserName', 'changeUserGender', 'changeUserTelNo']);
+
 const props = defineProps({
     name:   String,
     gender: String,
@@ -11,10 +13,37 @@ const gender    = ref(props.gender);
 const telNo     = ref(props.telNo);
 
 const event = {
+    onChangeName : (value) => {
+        const regName = /^[가-힣a-zA-Z]{2,20}$/;
+        if(regName.test(value)) {
+            emits('changeUserName', value);
+        } else {
+            emits('changeUserName', null);
+        }
+    },
     onClickGender : (value) => {
         gender.value = value;
+        emits('changeUserGender', value);
+    },
+    onChangeTelNo : (value) => {
+        const regTelNo = /^(01[016789]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+        if(regTelNo.test(value)) {
+            emits('changeUserTelNo', value);
+        } else {
+            emits('changeUserTelNo', null);
+        }
     }
-}
+    
+};
+
+
+watch(name, (value) => {
+    event.onChangeName(value);
+});
+
+watch(telNo, (value) => {
+    event.onChangeTelNo(value);
+});
 
 
 </script>
@@ -52,7 +81,7 @@ const event = {
                 <li>
                     <p>연락처 (선택)</p>
                     <input
-                        type="number"
+                        type="tel"
                         v-model="telNo"
                         placeholder="010xxxxXXXX"/>
                 </li>

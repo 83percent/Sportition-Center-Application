@@ -133,8 +133,7 @@ const isNextButtonActive = computed(() => {
                 v-if="step === 1"
                 :code="joinData.center.code"
                 :newYn="joinData.center.newYn"
-                @changeCenterInfo="event.changeCenterInfo"
-                />
+                @changeCenterInfo="event.changeCenterInfo" />
             
             <!-- 2 -->
             <LoginInfoComponent
@@ -150,7 +149,9 @@ const isNextButtonActive = computed(() => {
                 :name="joinData.userInfo.name"
                 :gender="joinData.userInfo.gender"
                 :telNo="joinData.userInfo.telNo"
-            />
+                @changeUserName="event.changeUserName"
+                @changeUserGender="event.changeUserGender"
+                @changeUserTelNo="event.changeUserTelNo" />
         </article>
         <div id="confirm-wrap">
             <button @click="nextStep" :class="isNextButtonActive ? 'active' : ''">

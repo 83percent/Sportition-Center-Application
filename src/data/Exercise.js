@@ -1,52 +1,110 @@
-const exercise = [
-    {
-        lvl: 1,
-        category: "upper", // 상체운동
-        name: '상체',
-        items: [
-            {
-                lvl: 2,
-                category: 'chest', // 상체운동 - 가슴운동
-                name: '가슴 운동',
-                items: [
-                    {
-                        lvl: 3,
-                        key: 'benchpress',
-                        name: '벤치 프레스'
-                    },
-                    {
-                        lvl: 3,
-                        key: 'inclinebenchpress',
-                        name: '벤치 프레스'
-                    },
-                ]
-            },
-            {
-                lvl: 2,
-                category: "back", // 상체운동 - 등운동
-                name: '등 운동',
-                items: [
-                    {
-                        lvl: 3,
-                        key: 'deadlift',
-                        name: '데드 리프트'
-                    },
-                ]
-            }
-        ]
-    },
-    {
-        lvl: 1,
-        category : "lower",
-        name: '하체 운동',
-        items: []
-    },
-    {
-        lvl: 1,
-        category : "arm",
-        name: '팔 운동',
-        items: []    
-    },
-]
+const exerciseList = [
+    { category: '등+하체', name: '컨벤셔널 데드리프트', value: 'conventionalDeadlift' },
+    { category: '등+하체', name: '루마니안 데드리프트', value: 'romanianDeadlift' },
+    { category: '등+하체', name: '스티프 데드리프트', value: 'stiffLeggedDeadlift' },
+    { category: '등+하체', name: '렉풀', value: 'rackPull' },
+    { category: '등', name: '벤트 오버 바벨로우', value: 'bentOverBarbellRow' },
+    { category: '등', name: '롱 풀', value: 'longPull' },
+    { category: '등', name: '암 풀  다운', value: 'armPulldown' },
+    { category: '등', name: '원암 케이블 풀 다운', value: 'oneArmCablePulldown' },
+    { category: '등', name: '원 암 시티드 로우', value: 'oneArmSeatedRow' },
+    { category: '등', name: '시티드 로우', value: 'seatedRow' },
+    { category: '등', name: '렛 풀 다운', value: 'latPulldown' },
+    { category: '등', name: '덤벨 로우', value: 'dumbbellRow' },
+    { category: '등', name: '원암 덤벨로우', value: 'oneArmDumbbellRow' },
+    { category: '등', name: '풀 업', value: 'pullUp' },
+    { category: '등', name: '친 업 어시스트', value: 'assistedChinUp' },
+    { category: '등', name: '원암 렛 풀 다운', value: 'oneArmLatPulldown' },
+    { category: '등', name: 'T 바 로우', value: 'tBarRow' },
+    { category: '하체', name: '바벨 스쿼트', value: 'barbellSquat' },
+    { category: '하체', name: '보수 스쿼트', value: 'bosuSquat' },
+    { category: '하체', name: '카프레이즈', value: 'calfRaise' },
+    { category: '하체', name: '스미스 랙 스쿼트', value: 'smithRackSquat' },
+    { category: '하체', name: 'V 스쿼트', value: 'vSquat' },
+    { category: '하체', name: '핵 스쿼트', value: 'hackSquat' },
+    { category: '하체', name: '맨몸 스쿼트', value: 'bodyweightSquat' },
+    { category: '하체', name: '점프 스쿼트', value: 'JumpSquat' },
+    { category: '하체', name: 'CC스쿼트', value: 'cCSquat' },
+    { category: '하체', name: '프론트 스쿼트', value: 'frontSquat' },
+    { category: '하체', name: '런지', value: 'lunge' },
+    { category: '하체', name: '블가리안 스플릿 스쿼트', value: 'bulgarianSplitSquat' },
+    { category: '하체', name: '스플릿 런지', value: 'splitLunge' },
+    { category: '하체', name: '런지 워킹', value: 'WalkingLunge' },
+    { category: '하체', name: '파워 레그 프레스', value: 'powerLegPress' },
+    { category: '하체', name: '시티드 레그 프레스', value: 'seatedLegPress' },
+    { category: '하체', name: '원 레그 프레스', value: 'singleLegPress' },
+    { category: '하체', name: '레그 컬', value: 'legCurl' },
+    { category: '하체', name: '레그 익스텐션', value: 'legExtension' },
+    { category: '하체', name: '이너 아웃 타이 in', value: 'innerThighIn' },
+    { category: '하체', name: '이너 아웃 타이 out', value: 'innerThighOut' },
+    { category: '하체', name: '사이드 레그 레터럴 레이즈', value: 'sideLegLateralRaise' },
+    { category: '하체', name: '힙 프레스', value: 'hipPress' },
+    { category: '하체', name: '케틀벨 스윙', value: 'kettlebellSwing' },
+    { category: '하체', name: '고블릿 스쿼트', value: 'gobletSquat' },
+    { category: '가슴', name: '딥스', value: 'dips' },
+    { category: '가슴', name: '푸쉬업', value: 'pushUp' },
+    { category: '가슴', name: '벤치 체스트 프레스', value: 'benchChestPress' },
+    { category: '가슴', name: '덤벨 체스트 프레스', value: 'dumbbellChestPress' },
+    { category: '가슴', name: '펙덱플라이 머신 체스트', value: 'pecDeckFlyChest' },
+    { category: '가슴', name: '덤벨 체스트 플라이', value: 'dumbbellChestFly' },
+    { category: '가슴', name: '벤치 체스트 프레스 스미스', value: 'benchChestPressSmith' },
+    { category: '가슴', name: '체스트 프레스 머신', value: 'chestPressMachine' },
+    { category: '가슴', name: '인클라인 벤치 체스트 프레스', value: 'inclineBenchChestPress' },
+    { category: '가슴', name: '인클라인 덤벨 체스트 프레스', value: 'inclineDumbbellChestPress ' },
+    { category: '가슴', name: '인클라인 체스트 프레스 스미스', value: 'inclineChestPressSmith' },
+    { category: '가슴', name: '인클라인 체스트 프레스 머신', value: 'inclineChestPressMachine' },
+    { category: '가슴', name: '디클라인 벤치 체스트 프레스', value: 'declineBenchChestPress' },
+    { category: '가슴', name: '디클라인 덤벨 체스트 프레스', value: 'declineDumbbellChestPress ' },
+    { category: '가슴', name: '디클라인 체스트 프레스 스미스', value: 'declineChestPressSmith' },
+    { category: '가슴', name: '디클라인 체스트 프레스 머신', value: 'declineChestPressMachine' },
+    { category: '어깨', name: '밀리터리프레스', value: 'militaryPress' },
+    { category: '어깨', name: '덤벨 프레스', value: 'dumbbellPress' },
+    { category: '어깨', name: '오버 헤드 바벨 프레스 스미스', value: 'overheadBarbellPressSmith' },
+    { category: '어깨', name: '숄더프레스 머신', value: 'shoulderPressMachine' },
+    { category: '어깨', name: '사이드 레터럴 레이즈', value: 'sideLateralRaise' },
+    { category: '어깨', name: '프론트 레터럴 레이즈', value: 'frontLateralRaise' },
+    { category: '어깨', name: '팩덱 플라이 머신 후면 삼각근', value: 'pecDeckFlyBehindDeltoid ofShoulder' },
+    { category: '어깨', name: '벤트오버 레터럴 레이즈', value: 'bentOverLateralRaise' },
+    { category: '어깨', name: '시티드 덤벨 레터럴 레이즈', value: 'seatedDumbbellLateralRaise' },
+    { category: '어깨', name: '케이블 로프 레터럴 레이즈', value: 'cableRopeLateralRaise' },
+    { category: '어깨', name: '케이블 로프 프론트 레이즈', value: 'cableRopeFrontRaise' },
+    { category: '어깨', name: '벤디드 싱글 암 레터럴 레이즈', value: 'bandedSingleArmLateralRaise' },
+    { category: '어깨', name: '벤디드 레터럴 레이즈', value: 'bandedLateralRaise' },
+    { category: '어깨', name: '인클라인 벤치 프론트 레이즈', value: 'inclineBenchFrontRaise' },
+    { category: '어깨', name: '업 라이트로우', value: 'uprightRow' },
+    { category: '어깨', name: '아놀드프레스', value: 'arnoldPress' },
+    { category: '어깨', name: '바벨 프론트 레이즈', value: 'barbellFrontRaise' },
+    { category: '어깨', name: '레터럴 레이즈 머신', value: 'lateralRaiseMachine' },
+    { category: '팔', name: '바벨 컬', value: 'barbellCurl' },
+    { category: '팔', name: '덤벨 컬', value: 'dumbbellCurl' },
+    { category: '팔', name: '시티드 덤벨 컬', value: 'seatedDumbbellCurl' },
+    { category: '팔', name: '프리쳐 컬', value: 'preacherCurl' },
+    { category: '팔', name: '헤머 컬', value: 'hammerCurl' },
+    { category: '팔', name: '케이블 헤머 컬', value: 'cableHammerCurl' },
+    { category: '팔', name: '케이블 컬', value: 'cableCurl' },
+    { category: '팔', name: '트라이셉스 로프 익스텐션', value: 'tricepsRopeExtension' },
+    { category: '팔', name: '트라이셉스 바벨 익스텐션', value: 'tricepsBarbellExtension' },
+    { category: '팔', name: '클로즈 그립 벤치 프레스', value: 'closeGripBenchPress' },
+    { category: '팔', name: '덤벨 킥 백', value: 'dumbbellKickback' },
+    { category: '팔', name: '케이블 킥 백', value: 'cableKickback' },
+    { category: '팔', name: '트라이셉스 벤트오버 푸쉬 다운', value: 'tricepsBentOverPushdown' },
+    { category: '코어', name: '어브도미널 플랙션', value: 'abdominalFlexion' },
+    { category: '코어', name: '싯업', value: 'sitUp' },
+    { category: '코어', name: '크런치', value: 'crunch' },
+    { category: '코어', name: '플랭크', value: 'plank' },
+    { category: '코어', name: '사이드플랭크', value: 'sidePlank' },
+    { category: '코어', name: '백 익스텐션', value: 'backExtension' },
+    { category: '코어', name: '브릿지', value: 'bridge' },
+    { category: '코어', name: '트위스터', value: 'twister' },
+    { category: '카디오 & 전신', name: '버피', value: 'burpee' },
+    { category: '카디오 & 전신', name: '마운틴 클라이밍', value: 'mountainClimber' },
+    { category: '카디오 & 전신', name: '암워킹', value: 'armWalk' },
+    { category: '카디오 & 전신', name: '쓰러스터', value: 'thruster' },
+    { category: '카디오 & 전신', name: '스텝 박스', value: 'stepBox' },
+    { category: '기능', name: '파워클린', value: 'powerClean' },
+    { category: '기능', name: '클린 앤 져크', value: 'cleanAndJerk' },
+    { category: '기능', name: '케틀벨 겟업', value: 'kettlebellGetUp' },
+    { category: '기능', name: '플라이오 메트릭', value: 'plyometric ' }
+];
 
-export default exercise;
+export default exerciseList;

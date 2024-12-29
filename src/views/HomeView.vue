@@ -1,58 +1,26 @@
 <script setup>
-import UserView from '@/views/home/user/UserView.vue';
+import NavMain from '@/components/home/nav/NavMain.vue';
 </script>
 
 <template>
-    <div id="wrap">
-        <header>
-            <div>
-                <h1>SPORTITION</h1>
-            </div>
-        </header>
-        <main>
-            <UserView></UserView>
-        </main>
-    </div>
-
-    
+    <main>
+        <NavMain />
+    </main>    
 </template>
 
 <style scoped lang="scss">
-#wrap {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+main {
     width: 100vw;
+    max-width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
-#wrap {
-    header {
-        position: fixed;
-        top: 0;
-        left: 0;
 
-        width: 100vw;
-        height: 5vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: #fff;
-        border-bottom: 1px solid #afafaf;
+@media (max-width: 767px) {
 
-        > div {
-            margin: 0.4rem 0;
+}
 
-            > h1 {
-                font-size: 1.3rem;
-//                color: var(--color-main-red);
-            }
-        }
-    }
+@media (min-width: 768px) {
 
-    main {
-        flex-grow: 1;
-        margin-top: 5vh;
-        height: 100%;
-    }
 }
 </style>

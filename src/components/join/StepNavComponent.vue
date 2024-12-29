@@ -1,24 +1,36 @@
 <script setup>
-import { defineProps } from 'vue';
-defineProps({
+import { ref, defineProps, defineEmits } from 'vue';
+const emits = defineEmits(['moveStep']);
+const props = defineProps({
     step: {
         type: Number,
         required: true
     }
 });
 
+const moveStep = (value) => {
+    emits('moveStep', value);
+}
+
+
 </script>
 
 <template>
     <div class="step-wrap">
-        <div :class="['step-container', {active: step >= 1}]">
+        <div
+            :class="['step-container', {active: step >= 1}]"
+            @click="moveStep(1)">
             <p>1</p>
         </div>
-        <div :class="['step-container', {active: step >= 2}]">
+        <div
+            :class="['step-container', {active: step >= 2}]"
+            @click="moveStep(2)">
             <div></div>
             <p>2</p> 
         </div>
-        <div :class="['step-container', {active: step >= 3}]">
+        <div
+            :class="['step-container', {active: step >= 3}]"
+            @click="moveStep(3)">
             <div></div>
             <p>3</p>
         </div>

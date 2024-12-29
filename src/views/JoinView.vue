@@ -24,7 +24,7 @@ const joinData = reactive({
     }
 });
 
-const step = ref(3);
+const step = ref(1);
 const nextStep = () => {
     switch(step.value) {
         case 1 : {
@@ -34,6 +34,7 @@ const nextStep = () => {
 
         case 2 : {
             if(validate.joinLoginInfo()) step.value++;
+            break;
         }
 
         case 3 : {
@@ -47,6 +48,27 @@ const nextStep = () => {
                 // TODO : Create User data
                 // TODO : Move to Login Page
             }
+            break;
+        }
+    }
+}
+
+const moveStep = (value) => {
+    switch(value) {
+        case 1 : {
+            step.value = 1;
+            break;
+        }
+        case 2 : {
+            if(validate.joinCenterData()) {
+                step.value = 2;
+                console.log("Move 2 success");
+            }
+            break;
+        }
+        case 3 : {
+            if(validate.joinLoginInfo()) step.value = 3;
+            break;
         }
     }
 }
@@ -126,7 +148,9 @@ const isNextButtonActive = computed(() => {
         </header>
         
         <article>
-            <StepNavComponent :step="step"/>
+            <StepNavComponent
+                :step="step"
+                @moveStep="moveStep"/>
 
             <!-- 1 -->
             <CenterRegistComponent

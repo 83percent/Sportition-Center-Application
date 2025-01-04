@@ -1,14 +1,23 @@
 <script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+/* 뒤로가기 버튼 기능 구현 */
+const goBack = () => {
+    router.back();
+}
 
 </script>
 
 <template>
     <nav>
+        <!-- TODO : 인입된 위치에 따라 뒤로가기 노출할지에 여부 작성필요-->
+        <div class="nav-container" @click="goBack">
+            <i class="material-icons">arrow_back_ios_new</i>
+        </div>
         <div class="logo-container">
             <h1>SPORTITION</h1>
-        </div>
-        <div class="nav-container">
-            <i class="material-icons">menu</i>
         </div>
     </nav>
 </template>
@@ -37,7 +46,7 @@ nav {
     > .nav-container {
         padding-top: 0.3rem;
         > i {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
         }
     }
 }

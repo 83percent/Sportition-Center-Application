@@ -9,7 +9,7 @@ const move = {
 
     },
     user: () => {
-
+        router.push('/users');
     },
     exerciseList: () => {
         router.push('/exercise/list');
@@ -33,7 +33,7 @@ const move = {
                 </div>
             </div>
             <div class="main-container">
-                <div>
+                <div @click="move.user">
                     <p>회원</p>
                     <i class="material-icons">people</i>
                 </div>

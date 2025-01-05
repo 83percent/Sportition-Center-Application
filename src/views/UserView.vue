@@ -1,32 +1,33 @@
 <script setup>
 import { groupByKoreanConsonants } from '@/utils/groupByKoreanConsonant';
-import testExerciseList from '@/data/Exercise';
 
 import NavMain from '@/components/home/nav/NavMain.vue';
-import ExerciseListComponent from '@/components/exercise/list/ExerciseListComponent.vue';
+import UserListComponent from '@/components/home/user/UserListComponent.vue';
 
-const exerciseList = groupByKoreanConsonants(testExerciseList);
+const testList = [];
+const userList = groupByKoreanConsonants(testList);
+
 </script>
 
 <template>
 <main>
     <NavMain />
     <div id="title-container">
-        <h1>운동 목록</h1>
+        <h1>회원</h1>
     </div>
     <div id="search-container">
         <div>
             <i class="material-icons">search</i>
-            <input type="text" placeholder="조회할 운동을 입력해주세요..."/>
+            <input type="text" placeholder="조회할 회원명을 입력해주세요..."/>
         </div>
     </div>
 
     <article id="list-container">
-        <ExerciseListComponent
-            v-for="(element,index) in exerciseList"
+        <UserListComponent
+            v-for="(element,index) in userList"
             :key="index"
             :filterValue="element.filterValue"
-            :filterResultList="element.filterResultList" />
+            :filterResultList="element.filterResultList" />        
     </article>
 </main>
 </template>

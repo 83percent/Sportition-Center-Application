@@ -1,4 +1,5 @@
 <script setup>
+import UserListElementComponent from '@/components/user/UserListElementComponent.vue';
 import { defineProps } from 'vue';
 
 const props = defineProps({
@@ -12,6 +13,8 @@ const props = defineProps({
     }
 });
 
+
+
 </script>
 
 <template>
@@ -20,7 +23,10 @@ const props = defineProps({
         <p>{{ filterValue }}</p>
     </div>
     <ul>
-
+        <UserListElementComponent
+            v-for="(element, index) in filterResultList"
+            :key="index"
+            :element="element" />
     </ul>
 </div>
 </template>

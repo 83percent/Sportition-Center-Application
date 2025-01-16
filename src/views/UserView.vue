@@ -1,11 +1,21 @@
 <script setup>
-import { groupByKoreanConsonants } from '@/utils/groupByKoreanConsonant';
+import { useRouter } from 'vue-router';
+import { groupByFirstChar } from '@/utils/groupByKoreanConsonant';
 
 import NavMain from '@/components/home/nav/NavMain.vue';
 import UserListComponent from '@/components/home/user/UserListComponent.vue';
 
-const testList = [];
-const userList = groupByKoreanConsonants(testList);
+const router = useRouter();
+const testList = [
+    {
+        id: "6a54ab23-02cd-41af-a179-3d4140aea556",
+        name: "이재훈",
+        score: "0"
+    }
+];
+const userList = groupByFirstChar(testList);
+
+
 
 </script>
 

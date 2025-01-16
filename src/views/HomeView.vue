@@ -6,7 +6,7 @@ import NavMain from '@/components/home/nav/NavMain.vue';
 const router = useRouter();
 const move = {
     leaderBoard: () => {
-
+        router.push('/leader-board')
     },
     user: () => {
         router.push('/users');
@@ -27,7 +27,7 @@ const move = {
                 <p>반가워요!</p>
             </div>
             <div class="main-container">
-                <div>
+                <div @click="move.leaderBoard">
                     <p>리더보드</p>
                     <i class="material-icons">leaderboard</i>
                 </div>

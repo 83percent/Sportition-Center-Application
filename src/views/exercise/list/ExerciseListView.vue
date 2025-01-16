@@ -1,11 +1,11 @@
 <script setup>
-import { groupByKoreanConsonants } from '@/utils/groupByKoreanConsonant';
+import { groupByFirstChar } from '@/utils/groupByKoreanConsonant';
 import testExerciseList from '@/data/Exercise';
 
 import NavMain from '@/components/home/nav/NavMain.vue';
 import ExerciseListComponent from '@/components/exercise/list/ExerciseListComponent.vue';
 
-const exerciseList = groupByKoreanConsonants(testExerciseList);
+const exerciseList = groupByFirstChar(testExerciseList);
 </script>
 
 <template>

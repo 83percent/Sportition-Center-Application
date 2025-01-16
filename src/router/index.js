@@ -5,6 +5,8 @@ import JoinView           from '@/views/JoinView.vue';
 import ExerciseView       from '@/views/exercise/ExerciseView.vue';
 import ExerciseListView   from '@/views/exercise/list/ExerciseListView.vue';
 import UserView           from '@/views/UserView.vue';
+import LeaderBoardView from '@/views/LeaderBoardView.vue';
+import UserDetailView from '@/views/UserDetailView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +40,16 @@ const router = createRouter({
       path: '/users',
       name: 'users',
       component: UserView
+    },
+    {
+      path: '/users/:id',
+      name: 'user',
+      component: UserDetailView
+    },
+    {
+      path: '/leader-board',
+      name: 'Leader Board',
+      component: LeaderBoardView
     }
   ],
 })
